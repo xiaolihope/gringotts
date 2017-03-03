@@ -78,6 +78,7 @@ class NeutronBillingProtocol(base.BillingProtocol):
             self.resource_regex,
             self.change_fip_ratelimit_regex,
             self.update_listener_regex,
+            self.delete_loadbalancer_regex,
         ]
         self.no_billing_resource_regexs = [
             self.delete_loadbalancer_regex,
@@ -151,7 +152,7 @@ class NeutronBillingProtocol(base.BillingProtocol):
         return False
 
     def delete_loadbalancer_action(self, method, path_info, body):
-        if method == 'PUT' \
+        if method == 'DELETE' \
             and self.delete_loadbalancer_regex.search(path_info):
             return True
         return False
